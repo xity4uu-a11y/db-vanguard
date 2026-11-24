@@ -1,0 +1,9 @@
+{
+  "$schema": "https://schema.tauri.app/config/2/capability",
+  "identifier": "default",
+  "description": "Default native desktop permissions for db-vanguard SQL Studio.",
+  "windows": ["main"],
+  "permissions": [
+    "core:default"
+  ]
+}

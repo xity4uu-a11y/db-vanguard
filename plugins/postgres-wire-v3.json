@@ -1,0 +1,21 @@
+{
+  "id": "postgres-wire-v3",
+  "name": "PostgreSQL Wire v3 Driver",
+  "version": "1.0.0",
+  "protocol": "postgresql-v3.0",
+  "wire_transport": "tcp",
+  "default_port": 5432,
+  "author": "xity4uu-a11y",
+  "license": "MIT",
+  "description": "Pure-Rust PostgreSQL frontend/backend wire protocol v3.0 TCP client with Trust, Cleartext, and MD5 auth plus O(1)-memory streaming exports.",
+  "capabilities": [
+    "query",
+    "schema_inspect",
+    "streaming_export",
+    "transactions",
+    "explain"
+  ],
+  "streaming_export": true,
+  "zero_c_deps": true,
+  "min_core_version": "1.0.0"
+}

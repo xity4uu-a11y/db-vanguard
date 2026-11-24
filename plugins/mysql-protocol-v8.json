@@ -1,0 +1,21 @@
+{
+  "id": "mysql-protocol-v8",
+  "name": "MySQL Protocol v8 Connector",
+  "version": "1.0.0",
+  "protocol": "mysql-client-server-v10",
+  "wire_transport": "tcp",
+  "default_port": 3306,
+  "author": "xity4uu-a11y",
+  "license": "MIT",
+  "description": "Community manifest for MySQL 8 and MariaDB text/binary protocol connections with server-side cursor streaming export support.",
+  "capabilities": [
+    "query",
+    "schema_inspect",
+    "streaming_export",
+    "transactions",
+    "explain"
+  ],
+  "streaming_export": true,
+  "zero_c_deps": true,
+  "min_core_version": "1.0.0"
+}

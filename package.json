@@ -1,0 +1,38 @@
+{
+  "name": "create-db-vanguard",
+  "version": "1.0.0",
+  "description": "1-click initializer and connection profile generator for db-vanguard — the native pure-Rust database GUI and streaming SQL exporter.",
+  "type": "module",
+  "license": "MIT",
+  "author": "xity4uu-a11y",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xity4uu-a11y/db-vanguard.git"
+  },
+  "bin": {
+    "create-db-vanguard": "./bin/create-db-vanguard.mjs"
+  },
+  "files": [
+    "bin/",
+    "plugins/",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "validate:plugins": "node scripts/validate-plugins.mjs",
+    "launcher:version": "node bin/create-db-vanguard.mjs --version",
+    "launcher:dry-run": "node bin/create-db-vanguard.mjs --dry-run"
+  },
+  "keywords": [
+    "database-gui",
+    "sql-client",
+    "postgresql",
+    "sqlite",
+    "tauri",
+    "rust",
+    "csv-export"
+  ]
+}

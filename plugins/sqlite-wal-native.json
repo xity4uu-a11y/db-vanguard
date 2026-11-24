@@ -1,0 +1,21 @@
+{
+  "id": "sqlite-wal-native",
+  "name": "SQLite 3 WAL Native Inspector",
+  "version": "1.0.0",
+  "protocol": "sqlite3-file-format",
+  "wire_transport": "file",
+  "default_port": null,
+  "author": "xity4uu-a11y",
+  "license": "MIT",
+  "description": "Zero-C binary SQLite 3 database header, WAL mode, schema cookie, and Page 1 B-tree inspector paired with an in-process SQL engine.",
+  "capabilities": [
+    "query",
+    "schema_inspect",
+    "streaming_export",
+    "wal_inspect",
+    "explain"
+  ],
+  "streaming_export": true,
+  "zero_c_deps": true,
+  "min_core_version": "1.0.0"
+}

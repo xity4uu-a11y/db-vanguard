@@ -1,0 +1,53 @@
+name: db-vanguard CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  rust-core:
+    name: Rust Core Tests, Clippy & Release Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+      - name: Run vanguard-core unit tests
+        run: cargo test -p vanguard-core -- --nocapture
+      - name: Run strict clippy lints
+        run: cargo clippy -p vanguard-core --all-targets -- -D warnings
+      - name: Build release CLI binary
+        run: cargo build --release -p vanguard-core
+      - name: Smoke test CLI binary
+        run: |
+          ./target/release/db-vanguard version
+          ./target/release/db-vanguard validate-plugins --dir plugins
+          ./target/release/db-vanguard bench-export --rows 50000 --format csv
+
+  ui-and-plugins:
+    name: React 19 UI Typecheck, Vitest, Build & Plugin Schema Validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Validate community driver manifests
+        run: node scripts/validate-plugins.mjs
+      - name: Smoke test 1-click launcher
+        run: node bin/create-db-vanguard.mjs --version && node bin/create-db-vanguard.mjs --dry-run
+      - name: Install UI dependencies
+        working-directory: ui
+        run: npm ci
+      - name: TypeScript typecheck
+        working-directory: ui
+        run: npm run typecheck
+      - name: Run Vitest unit tests
+        working-directory: ui
+        run: npm test
+      - name: Production Vite build
+        working-directory: ui
+        run: npm run build

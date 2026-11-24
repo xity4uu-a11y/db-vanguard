@@ -1,0 +1,21 @@
+{
+  "id": "clickhouse-http-driver",
+  "name": "ClickHouse HTTP Columnar Driver",
+  "version": "1.0.0",
+  "protocol": "clickhouse-http-v2",
+  "wire_transport": "http",
+  "default_port": 8123,
+  "author": "xity4uu-a11y",
+  "license": "MIT",
+  "description": "High-throughput HTTP/NDJSON streaming driver manifest for ClickHouse analytical clusters with chunked columnar result streaming.",
+  "capabilities": [
+    "query",
+    "schema_inspect",
+    "streaming_export",
+    "columnar_batch",
+    "explain"
+  ],
+  "streaming_export": true,
+  "zero_c_deps": true,
+  "min_core_version": "1.0.0"
+}

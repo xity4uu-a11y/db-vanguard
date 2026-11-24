@@ -1,0 +1,17 @@
+[workspace]
+resolver = "2"
+members = ["crates/vanguard-core"]
+exclude = ["src-tauri"]
+
+[workspace.package]
+version = "1.0.0"
+edition = "2021"
+license = "MIT"
+authors = ["xity4uu-a11y <255560410+xity4uu-a11y@users.noreply.github.com>"]
+repository = "https://github.com/xity4uu-a11y/db-vanguard"
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 1
+strip = true

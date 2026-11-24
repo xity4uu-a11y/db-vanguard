@@ -1,0 +1,21 @@
+{
+  "id": "duckdb-parquet-reader",
+  "name": "DuckDB Parquet Analytical Reader",
+  "version": "1.0.0",
+  "protocol": "duckdb-columnar-v1",
+  "wire_transport": "file",
+  "default_port": null,
+  "author": "xity4uu-a11y",
+  "license": "MIT",
+  "description": "Analytical local driver manifest targeting DuckDB database files and direct zero-copy Parquet file scanning with columnar batch exports.",
+  "capabilities": [
+    "query",
+    "schema_inspect",
+    "streaming_export",
+    "parquet_scan",
+    "columnar_batch"
+  ],
+  "streaming_export": true,
+  "zero_c_deps": false,
+  "min_core_version": "1.0.0"
+}

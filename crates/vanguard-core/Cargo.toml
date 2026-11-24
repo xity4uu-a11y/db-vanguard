@@ -1,0 +1,17 @@
+[package]
+name = "vanguard-core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+description = "Pure-Rust database driver abstraction, PostgreSQL v3 wire protocol client, SQLite 3 binary inspector, SQL lexer/formatter/linter, and constant-memory streaming exporter."
+
+[[bin]]
+name = "db-vanguard"
+path = "src/bin/db-vanguard.rs"
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+clap = { version = "4.5", default-features = false, features = ["std", "derive", "help", "usage", "error-context"] }
