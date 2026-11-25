@@ -1,26 +1,20 @@
-# Stop paying $200/yr for a database GUI that crashes on large exports.
+# db-vanguard
 
 ![db-vanguard Banner](assets/banner.svg)
 
-**db-vanguard** is a local-first, native pure-Rust database GUI and CLI built on **Tauri v2**, **React 19**, and **`vanguard-core`** — engineered to replace bloated Electron clients and recurring `$99-$249/yr` database IDE subscriptions with a single zero-C-dependency Rust engine that streams 50,000+ row exports in constant memory.
+A fast, pure-Rust SQL client and CLI (`vanguard-core` + Tauri v2 + React 19) built around one annoyance: database GUIs shouldn't eat 900 MB of RAM or hang the moment you export 50,000 rows to CSV.
+
+`db-vanguard` streams CSV, NDJSON, and SQL `INSERT` exports through a fixed `64 KiB` Rust `BufWriter` (`~1.4M rows/sec` in local benchmarks, constant memory), speaks PostgreSQL Wire Protocol v3 directly over TCP, inspects SQLite 3 headers without C bindings, and runs a 7-rule destructive-query safety linter before you accidentally fire a `DELETE` missing a `WHERE` clause.
 
 ![db-vanguard Native SQL Studio Demo](assets/demo-sql-grid.svg)
 
-<!-- Optional screen-capture slot: replace with assets/demo.gif when recording native desktop captures -->
+## Why build this?
 
----
+- **Constant-memory exports.** Instead of loading every result row into a JS or JVM array before writing a file, rows stream straight to disk with built-in OWASP CSV formula neutralization (`=`, `+`, `-`, `@`).
+- **Light native footprint.** Tauri v2 + pure Rust keeps idle memory tiny compared to JVM/Electron database tools.
+- **No yearly license renewals.** Basic query editing, formatting, schema browsing, and exports belong in a clean MIT-licensed local tool.
 
-## Why This Exists
-
-Modern database GUIs fail engineers on three avoidable fronts:
-
-1. **The Electron RAM Tax**: Opening a single SQL tab in an Electron or JVM database client routinely consumes `500-900 MB` of RAM before a single row is fetched. `db-vanguard` uses a native Tauri v2 shell backed by a pure-Rust engine (`~18 MB` resident footprint).
-2. **Perpetual Subscription Lock-In**: Core local developer workflows — running SQL, inspecting schemas, formatting queries, and exporting CSVs — should not require a `$99-$249/yr` seat license or cloud account telemetry.
-3. **Out-of-Memory Crashes on Large Exports**: Traditional GUIs materialize entire query results into JavaScript or JVM heap arrays before serializing CSV/SQL files, freezing or crashing at 50k-500k rows. `db-vanguard` streams rows through a fixed `64 KiB` Rust `BufWriter` in `O(1)` memory with built-in **OWASP CSV formula-injection neutralization**.
-
----
-
-## SaaS & Paid Tools Replaced
+## How it compares
 
 | Capability | db-vanguard (v1.0.0) | JetBrains DataGrip | TablePlus | Postico 2 | DBeaver Pro |
 | :--- | :--- | :--- | :--- | :--- | :--- |
